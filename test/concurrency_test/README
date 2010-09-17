@@ -1,0 +1,8 @@
+The files in this directory are to support concurrent_chunk_write_test.rb
+
+In order to run this test, you must have mysql.
+
+The test assumes that it can connect to mysql using the settings found in mysql_db.yml
+
+You can create this database by running:
+ $ mysqladmin create concurrency_test -u root

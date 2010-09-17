@@ -1,0 +1,11 @@
+== FileStorage
+
+A rails plugin similar to acts_as_attachment/paperclip, but different.  We don't attach files to things.  Files ARE the things.  So you say your model has_file_storage and it will respond to things like file_name and data. (But in actual implementation these are stored in a separate table)
+
+Also, we support MogileFS, so there's that.
+
+
+
+Copyright (c) 2008-2010 3M. All rights reserved. Released under the MIT license.
+
+Authored by Jacob Burkhart and Rajiv Aaron Manglani.
