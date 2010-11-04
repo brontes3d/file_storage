@@ -12,11 +12,11 @@ RFuzz::HttpClient.class_eval do
     begin
       resp = cl.send_request(:GET, uri.path, {})
     rescue IOError => e
-      raise IOError, "Problem reading file #{file_id} : #{e}"
+      raise IOError, "Error reading from '#{path}': #{e.message}"
     end
     
     unless resp.http_status == "200"
-      raise IOError, "mogilefs backend request failed with '#{resp.http_status}'"
+      raise IOError, "mogilefs backend request to GET '#{path}' failed with '#{resp.http_status}'"
     end
     
     FileStorage.log.debug "reading from mogilefs '#{path}' complete"
