@@ -138,7 +138,7 @@ module FileStorage
           mg.send(cmd, *args)
         rescue MogileFS::UnreadableSocketError
           if should_retry
-            FileStorage.log.error "mogilefs exception during '#{cmd}': #{$!.class.to_s}: #{$!.message}"
+            FileStorage.log.error "mogilefs exception during '#{cmd}': #{$!.class.to_s}: #{$!.message.strip}"
             FileStorage.log.warn "attempting retry of mogilefs command '#{cmd}'"
             should_retry = false
             mg.backend.shutdown
@@ -147,8 +147,8 @@ module FileStorage
           raise
         end
       rescue
-        FileStorage.log.fatal "mogilefs exception during '#{cmd}': #{$!.class.to_s}: #{$!.message}\n#{(args || []).inspect}"
-        raise IOError, "MogileFS backend FAIL, #{$!.class.to_s}: #{$!.message}. #{cmd}:#{(args || []).inspect}"
+        FileStorage.log.fatal "mogilefs exception during '#{cmd}': #{$!.class.to_s}: #{$!.message.strip}\n#{(args || []).inspect}"
+        raise IOError, "MogileFS backend FAIL, #{$!.class.to_s}: #{$!.message.strip}. #{cmd}:#{(args || []).inspect}"
       ensure
         mg.backend.shutdown
       end
